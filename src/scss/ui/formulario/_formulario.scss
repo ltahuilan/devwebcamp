@@ -1,0 +1,91 @@
+@use 'base/mixins' as mix;
+@use 'base/variables' as var;
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+
+    &__fieldset {
+        border: none;
+    }
+
+    &__legend {
+        color: var.$gris;
+        font-size: 2.2rem;
+    }
+
+    &__bloque {
+        display: flex;
+        flex-direction: column;
+        margin: 1.5rem 0;
+    }
+
+    &__contenedor-icono {
+        display: flex;
+        border-radius: .5rem;
+        overflow: hidden;
+    }
+
+    &__icono {
+        width: 4rem;
+        background-color: var.$gris-oscuro;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i {
+            color: var.$blanco;
+            font-size: 2rem;
+        }
+    }
+
+    &__label,
+    &__texto {
+        color: lighten(var.$negro, 20%);
+        margin-bottom: .5rem;
+    }
+
+    &__input {
+        padding: 1rem;
+        border: 1px solid lighten(var.$negro, 20%);
+        border-radius: .5rem;
+
+        &--sociales {
+            @extend .formulario__input;
+            flex: 1;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    }
+
+    &__imagen-actual{
+        max-width: 20rem;
+        margin-bottom: 2rem;
+    }
+
+    &__input[type="file"] {
+        border: none;
+    }
+
+    &__listado {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    &__contenedor-tag {
+        @include mix.tags;
+    }
+
+    &__submit {
+        @include mix.boton(var.$azul, var.$blanco);
+        align-self: flex-start;
+        width: auto;
+        
+        &--registrar {
+            width: 90%;
+            margin: 0 auto;
+        }
+    }
+
+}

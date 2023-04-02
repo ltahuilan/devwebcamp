@@ -1,0 +1,52 @@
+@use 'base/variables' as var;
+@use 'base/mixins' as mix;
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+
+    &__head {
+        background-color: var.$gris-oscuro;
+        color: var.$blanco;
+    }
+    
+    &__th {
+        padding: 1rem;
+        text-align: left;
+    }
+
+    &__tr {
+        &:nth-child(even) {
+            background-color: darken(var.$gris-claro, 3%);
+        }
+    }
+
+    &__td {
+        padding: 1.5rem 1rem;
+
+        &--acciones {
+            @extend .table__td;
+            display: flex;
+            justify-content: flex-end;
+            gap: 2rem;
+            align-items: center;
+        }
+    }
+
+    &__acciones {
+        all: unset;
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        font-weight: var.$bold;
+
+        &--eliminar{
+            color: var.$rojo;
+        }
+        &--editar {
+            color: var.$azul;
+        }
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

@@ -1,0 +1,30 @@
+@use 'variables' as var;
+@use 'mixins' as mix;
+
+h1, h2, h3 {
+    @include mix.headings;
+}
+
+h1 {
+    font-size: 4rem;
+}
+h2 {
+    font-size: 3.6rem;
+}
+h3 {
+    font-size: 3rem;
+}
+.text-center {
+    text-align: center;
+}
+
+/*
+ *SELECTOR DE ATRIBUTOS
+ * $ elementos cuyo atributo termina con...
+ * ^ elementos cuyo atributo comienza con...
+ * * elementos cuyo atributo contenga...
+ * ~ elementos cuyo atributo class contenga...
+*/
+[class$="__heading"] {
+    @include mix.nombre-pagina;
+}

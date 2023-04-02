@@ -1,0 +1,22 @@
+@use 'base/variables' as var;
+
+.acciones {
+    margin: 3rem;
+    display: flex;
+    justify-content: space-between;
+
+    &--centrar {
+        @extend .acciones;
+        justify-content: center;
+    }
+
+    &__enlace {
+        color: var.$negro;
+        font-weight: var.$regular;
+        font-size: 1.6rem;
+        
+        &:hover {
+            color: darken(var.$azul, 25%);
+        }
+    }
+}

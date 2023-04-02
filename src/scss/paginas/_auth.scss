@@ -1,0 +1,11 @@
+@use 'base/mixins' as mix;
+@use 'base/variables' as var;
+
+
+.auth {
+    @include mix.contenedor-sm;
+
+    &__texto {
+        text-align: center;
+    }
+}

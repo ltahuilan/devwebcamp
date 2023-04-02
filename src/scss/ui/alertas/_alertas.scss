@@ -1,0 +1,19 @@
+@use 'base/variables' as var;
+
+.alerta {
+    margin-bottom: 1rem;
+    padding: 1rem 1rem 1rem 3rem;
+
+    &__error {
+        background-color: lighten(var.$rojo, 55%);
+        border-left: 5px solid var.$rojo;
+        color: var.$rojo;
+    }
+
+    &__exito {
+        background-color: lighten(var.$verde, 40%);
+        border-left: 5px solid darken(var.$verde, 10%);
+        color: darken(var.$verde, 10%);
+
+    }
+}

@@ -1,0 +1,131 @@
+@use 'base/mixins' as mix;
+@use 'base/variables' as var;
+
+
+.dashboard {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var.$gris-claro;
+    
+    &__header {
+       background-color: var.$gris-oscuro;
+       padding: 2rem;
+
+       @include mix.tablet {
+            flex-direction: row;
+       }
+    }
+
+    &__header-grid {
+        display: flex;
+        flex-direction: column;
+
+        @include mix.tablet {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+
+    &__logo {
+        @include mix.logo;
+        @include mix.texto-fluido(2rem, 3rem);
+    }
+
+    &__form {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__form--logout {
+        @include mix.enlace;
+    }
+
+    &__grid {
+        display: flex;
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    &__sidebar {
+        background-color: lighten(var.$gris-oscuro, 10%);
+    }
+    
+    &__menu {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    &__enlace {
+        color: lighten(var.$gris-oscuro, 50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        border-radius: .7rem;
+        transition: 300ms background-color ease-in-out, 300ms color ease;
+
+        &:hover,
+        &--activo {
+            background-color: lighten(var.$gris-oscuro, 20%);
+            color: var.$blanco;
+        }
+    }
+
+    &__icono {
+        font-size: 2rem;
+    }
+
+    &__menu-texto {
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-top: 1rem;
+    }
+
+    &__contenido {
+        width: 100%;
+        padding: 1rem 1rem 3rem 1rem;
+        overflow-y: scroll;
+        @include mix.tablet {
+            padding: 1rem 5rem 3rem 5rem;
+        }
+    }
+
+    &__titulo {
+        text-align: center;
+    }
+
+    &__contenedor-boton {
+        @include mix.tablet {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+    
+    &__boton {
+        @include mix.boton(var.$azul, var.$blanco);
+        text-transform: uppercase;
+        font-size: 1.2rem;
+        @include mix.tablet {
+            width: auto;
+        }
+    }
+
+    //se usará para heredar estilos a contenedores de formularios
+    &__contenedor {
+        @include mix.box-shadow;
+        background-color: var.$blanco;
+        padding: 2rem;
+        margin-top: 5rem;
+    }
+    
+    &__formulario {
+        @extend .dashboard__contenedor;
+        @include mix.contenedor-md;
+        margin-top: 5rem;
+    }
+}
