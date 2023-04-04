@@ -1,74 +1,78 @@
 (function(){
-
     const tagsInput = document.querySelector('#tags_input');
+    const tagsHidden = document.querySelector('[name="tags"]');
     const tagsDiv = document.querySelector('#tags');
-    const inputHidden = document.querySelector('input[name="tags"]');
     
-    
+    //si existe el elemento en el html
     if(tagsInput) {
-        let arrTags = [];
-        tagsInput.addEventListener('keypress', addTags);
-        
-        //Recuperar y mostrar los tags - aplica durante la edición de un registro de ponente
-        if(inputHidden.value != '') {
-            arrTags = inputHidden.value.split(',');
-            showTags();
-        }
+        let tags = [];
+        tagsInput.addEventListener('keypress', agregarTags);
 
-        function addTags(event) {            
-
+        function agregarTags(event) {
+            //detectar el keycode de la coma
             if(event.keyCode === 44) {
-
-                if(event.target.value.trim() === '' || event.target.value < 1){
+                //prevenir agregar vacíos o textos con una letra
+                if(event.target.value.trim() === '' || event.target.value.length <= 1) {
+                    event.preventDefault();
+                    //limpiar input
+                    tagsInput.value = '';
                     return;
-                };
-
-                event.preventDefault(); //previene la accion de agregar la coma
-
-                arrTags = [...arrTags, event.target.value.trim()];
+                }
+    
+                event.preventDefault();
+    
+                //agregar al arreglo de tags
+                tags = [...tags, event.target.value.trim()];
+    
+                //agregar al input hidden
+                agregarTagsInputHidden();
+    
+                //limpiar input
                 tagsInput.value = '';
-
-                showTags();
+    
+                mostrarTags();
+    
             }
         }
-
-        function showTags() {
-            //limpiar HTML existente
-            tagsDiv.innerHTML = '';
-
-            arrTags.forEach(tag => {
+    
+        function agregarTagsInputHidden() {        
+            tagsHidden.value = tags;
+        }
+    
+        function mostrarTags() {
+            //remover elementos existentes
+            while(tagsDiv.firstChild){
+                tagsDiv.removeChild(tagsDiv.firstChild);
+            }
+    
+            tags.forEach(tag => {
                 const contenedorTag = document.createElement('DIV');
                 contenedorTag.classList.add('formulario__contenedor-tag');
-
-                const etiqueta = document.createElement('LI');
-                etiqueta.classList.add('formulario__tag');
-                etiqueta.textContent = tag;
-
-                const icono = document.createElement('I');
-                icono.classList.add('fa-regular', 'fa-circle-xmark', 'formulario__tag-icono');
-                icono.onclick = removeTag;
-                contenedorTag.appendChild(etiqueta);
-                contenedorTag.appendChild(icono);
+    
+                const tagLi = document.createElement('LI');
+                tagLi.classList.add('formulario__tag');
+                tagLi.textContent = tag;
+    
+                const icon = document.createElement('I');
+                icon.classList.add('fa-regular', 'fa-circle-xmark', 'formulario__tag-icono');
+                icon.onclick = eliminarTag;
+    
+                contenedorTag.appendChild(tagLi);
+                contenedorTag.appendChild(icon);
                 tagsDiv.appendChild(contenedorTag);
-
-                addTextInputHidden();
-            });
+            })
         }
-
-        function addTextInputHidden() {
-            inputHidden.value = arrTags.toString();
-        }
-
-        function removeTag(event) {
-
-            //eliminar elemento del DOM
+    
+        function eliminarTag(event) {
+            //remover elemento del DOM
             event.target.parentElement.remove();
-
-            //filtar elemenos restantes del arreglo
-            arrTags = arrTags.filter(tag => tag !== event.target.parentElement.firstElementChild.innerText);
-
-            addTextInputHidden();
-        }
+    
+            //actualizar arreglo
+            tags = tags.filter(tag => tag !== event.target.parentElement.firstChild.textContent);
+    
+            //actualizar el value del input hidden
+            agregarTagsInputHidden();
+        };
     }
 
 })();

@@ -4,7 +4,7 @@
   "description": "Proyecto Final Desarrollo Web Completo con @codigoconjuan",
   "main": "index.js",
   "scripts": {
-    "gulp": "gulp dev"
+    "dev": "gulp dev"
   },
   "author": "",
   "license": "ISC",

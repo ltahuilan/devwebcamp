@@ -76,6 +76,7 @@
 
     <div class="formulario__bloque">
         <label for="tags_input" class="formulario__label">Áreas de experiencia (separadas por coma)</label>
+        <input type="hidden" name="tags" value="<?php echo $ponente->tags ?? ''; ?>">
         <input
             type="text"
             class="formulario__input"
@@ -85,7 +86,6 @@
     </div>
 
     <div id="tags" class="formulario__listado"></div>
-    <input type="hidden" name="tags" value="<?php echo $ponente->tags ?? ''; ?>">
 
 </fieldset>
 

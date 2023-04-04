@@ -168,8 +168,9 @@
 @mixin tags {
     @include reset-lista;
     display: flex;
-    gap: .5rem;
+    gap: .7rem;
     align-items: center;
+    justify-content: center;
     background-color: var.$azul;
     border-radius: .5rem;
     padding: 1rem;
@@ -186,6 +187,7 @@
         font-size: 1.8rem;
         &:hover {
             cursor: pointer;
+            color: lighten(var.$rojo, 30%);
         }
     }
 }

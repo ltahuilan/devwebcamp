@@ -12,6 +12,9 @@ use Controllers\RegistradosController;
 
 $router = new Router();
 
+//temp
+$router->get('/', [AuthController::class, 'login']);
+
 
 // Login
 $router->get('/login', [AuthController::class, 'login']);
