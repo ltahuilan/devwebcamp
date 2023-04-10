@@ -4,6 +4,9 @@ namespace Model;
 
 class ActiveRecord {
 
+    public $id;
+    public $imagen;
+
     //atributos estaticos
     protected static $db;
     protected static $tabla = '';
@@ -176,7 +179,7 @@ class ActiveRecord {
      * Método que que consulta un registro en una columna de la BD
      */
     public static function where($columna, $valor) {
-        $query = "SELECT *FROM " . static::$tabla . " WHERE ${columna} = '$valor'";
+        $query = "SELECT *FROM " . static::$tabla . " WHERE $columna = '$valor'";
 
         $resultado = self::consultarSQL($query);
         return array_shift($resultado);
@@ -186,7 +189,7 @@ class ActiveRecord {
      * Consultar todos los registros asociados a un id
      */
     public static function belongsTo($columna, $valor) {
-        $query = "SELECT *FROM " . static::$tabla . " WHERE ${columna} = '$valor'";
+        $query = "SELECT *FROM " . static::$tabla . " WHERE $columna} = '$valor'";
 
         $resultado = self::consultarSQL($query);
         return $resultado;
@@ -196,9 +199,19 @@ class ActiveRecord {
      * Método para encontrar un registro en concreto
      */
     public static function find($id) {
-        $query = "SELECT * FROM ". static::$tabla . " WHERE id=${id}";
+        $query = "SELECT * FROM ". static::$tabla . " WHERE id=$id";
         $resultado = self::consultarSQL($query);
         return array_shift($resultado); //array_shift devuelve el primer elemento de un array
+    }
+
+    /**
+     * Método para contar el total de registros de una tabla
+     */
+    public static function total_registros() {
+        $query = "SELECT COUNT(*) FROM " . static::$tabla;
+        $resultado = self::$db->query($query);
+        $total = array_shift($resultado->fetch_array() );
+        return $total;
     }
 
 
@@ -247,6 +260,7 @@ class ActiveRecord {
         }
         return $this;
     }
+
 
     /**
      * Eliminar archivos de imagenes huérfanas

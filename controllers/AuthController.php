@@ -45,16 +45,18 @@ class AuthController {
                         $_SESSION['nombre'] = $usuario->nombre;
                         $_SESSION['apellido'] = $usuario->apellido;
                         $_SESSION['email'] = $usuario->email;
-                        $_SESSION['admin'] = $usuario->admin ?? NULL;
+                        $_SESSION['admin'] = (int) $usuario->admin === 1 ? (int) $usuario->admin : NULL;
 
                         //redireccionar hacia proyectos
-                        // debuguear($_SESSION['admin']);
+                        // debuguear($_SESSION);
 
                         if($_SESSION['admin'] !== NULL) {
                             header('Location: /admin/dashboard');
                         }else {
-                            header('Location: /dashboard');
+                            debuguear('NO eres admin...');
+                            header('Location: /finalizar-registro');
                         }
+                        
                     }
                 }
             }

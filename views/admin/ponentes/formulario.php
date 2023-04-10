@@ -58,13 +58,13 @@
             id="imagen"
             name="imagen"
         >
-
+        <!-- Mostrar imagen solo si existe la variable auxiliar -->
         <?php if(isset($ponente->imagen_actual)) {?>
             <p class="formulario__texto">Imagen actual</p>
             <picture>
-                <source srcset="<?php echo $_ENV['host'] . '/img/speakers/' . $ponente->imagen . '.webp';?>" type="image/webp">
-                <source srcset="<?php echo $_ENV['host'] . '/img/speakers/' . $ponente->imagen . '.png';?>" type="image/png">
-                <img src="<?php echo $_ENV['host'] . '/img/speakers/' . $ponente->imagen . '.png';?>" alt="imagen actual" class="formulario__imagen-actual">        
+                <source srcset="<?php echo $_ENV['host'] . '/img/uploads/' . $ponente->imagen . '.webp';?>" type="image/webp">
+                <source srcset="<?php echo $_ENV['host'] . '/img/uploads/' . $ponente->imagen . '.png';?>" type="image/png">
+                <img src="<?php echo $_ENV['host'] . '/img/uploads/' . $ponente->imagen . '.png';?>" alt="imagen actual" class="formulario__imagen-actual">        
             </picture>
         <?php }?>
     </div>
