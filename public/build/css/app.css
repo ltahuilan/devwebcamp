@@ -948,4 +948,48 @@ h3 {
 .table__acciones:hover {
   cursor: pointer;
 }
+
+.paginacion {
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+@media (min-width: 768px) {
+  .paginacion {
+    justify-content: flex-end;
+  }
+}
+.paginacion__enlace {
+  color: #007df4;
+}
+.paginacion__enlace--texto {
+  border: 1px solid #007df4;
+  padding: 1rem 1.5rem;
+  border-radius: 0.7rem;
+  font-size: 1.6rem;
+}
+.paginacion__enlace--texto:hover {
+  background-color: #007df4;
+  color: #FFFFFF;
+}
+.paginacion__enlace--actual {
+  color: #64748B;
+  font-weight: bold;
+  display: none;
+}
+@media (min-width: 768px) {
+  .paginacion__enlace--actual {
+    display: inline;
+  }
+}
+.paginacion__enlace--numero {
+  display: none;
+}
+@media (min-width: 768px) {
+  .paginacion__enlace--numero {
+    display: inline;
+  }
+}
 /*# sourceMappingURL=app.css.map */

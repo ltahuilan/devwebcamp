@@ -17,19 +17,27 @@ class PonentesController {
         
         //leer pagina actual del query string y garantizar se muestre numero entero
         $pagina_actual = filter_var($_GET['page'], FILTER_VALIDATE_INT);
+
+        //Esta condicion garantiza que siempre se muestre al menos la pagina 1 en el query string
         if(!$pagina_actual || $pagina_actual < 0) {
             header('Location: /admin/ponentes?page=1');
         }
 
-        $regisros_por_pagina = 6;
+        $regisros_por_pagina = 5;
         $total_registros = Ponente::total_registros();      
         $paginacion = new Paginacion($pagina_actual, $regisros_por_pagina, $total_registros);
 
-        $ponentes = Ponente::all();
+        //evitar se consulte una página mayor al total de paginas
+        if($pagina_actual > $paginacion->total_paginas()) {
+            header('Location: /admin/ponentes?page=1');
+        }
+
+        $ponentes = Ponente::paginar($regisros_por_pagina, $paginacion->offset());
 
         $router->render('admin/ponentes/index', [
             'titulo' => 'Ponentes',
-            'ponentes' => $ponentes
+            'ponentes' => $ponentes,
+            'paginacion' => $paginacion->paginacion()
         ]);
         
     }

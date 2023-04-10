@@ -163,7 +163,7 @@ class ActiveRecord {
      * método para consultar todos los registros
      */
     public static function all() {        
-        $query = "SELECT * FROM " . static::$tabla; 
+        $query = "SELECT * FROM " . static::$tabla . " ORDER BY id ASC"; 
         return self::consultarSQL($query);
     }
     
@@ -171,7 +171,15 @@ class ActiveRecord {
      * método que consulta determinado número de registros
      */
     public static function get($limite) {
-        $query ="SELECT * FROM " . static::$tabla . " LIMIT " . $limite;
+        $query = "SELECT * FROM " . static::$tabla . " LIMIT {$limite}";
+        return self::consultarSQL($query);
+    }
+
+    /**
+     * metodo que trae los registras en funcion de una paginacion
+     */
+    public static function paginar($registros_por_pagina, $offset) {
+        $query = "SELECT * FROM " . static::$tabla . " ORDER BY id ASC LIMIT {$registros_por_pagina} offset {$offset}";
         return self::consultarSQL($query);
     }
 
@@ -180,7 +188,6 @@ class ActiveRecord {
      */
     public static function where($columna, $valor) {
         $query = "SELECT *FROM " . static::$tabla . " WHERE $columna = '$valor'";
-
         $resultado = self::consultarSQL($query);
         return array_shift($resultado);
     }
@@ -189,8 +196,8 @@ class ActiveRecord {
      * Consultar todos los registros asociados a un id
      */
     public static function belongsTo($columna, $valor) {
-        $query = "SELECT *FROM " . static::$tabla . " WHERE $columna} = '$valor'";
-
+        $query = "SELECT *FROM " . static::$tabla . " WHERE $columna = '$valor'";
+        debuguear($query);
         $resultado = self::consultarSQL($query);
         return $resultado;
     }
