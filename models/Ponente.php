@@ -53,7 +53,3 @@ class Ponente extends ActiveRecord {
     }
 
 }
-
-
-
-?>

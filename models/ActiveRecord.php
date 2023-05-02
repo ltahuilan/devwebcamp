@@ -4,8 +4,8 @@ namespace Model;
 
 class ActiveRecord {
 
-    public $id;
-    public $imagen;
+    protected $id;
+    protected $imagen;
 
     //atributos estaticos
     protected static $db;
@@ -162,8 +162,8 @@ class ActiveRecord {
     /**
      * método para consultar todos los registros
      */
-    public static function all() {        
-        $query = "SELECT * FROM " . static::$tabla . " ORDER BY id ASC"; 
+    public static function all($orden = 'ASC') {        
+        $query = "SELECT * FROM " . static::$tabla . " ORDER BY id {$orden}";
         return self::consultarSQL($query);
     }
     
@@ -190,6 +190,25 @@ class ActiveRecord {
         $query = "SELECT *FROM " . static::$tabla . " WHERE $columna = '$valor'";
         $resultado = self::consultarSQL($query);
         return array_shift($resultado);
+    }
+
+    /**
+     * Método que que consulta un registro en una columna de la BD
+     */
+    public static function whereArray($array = []) {
+        $query = "SELECT * FROM " . static::$tabla . " WHERE ";
+
+        foreach($array as $key => $value) {
+
+            if($key == array_key_last($array)) {
+                $query .= " {$key} = '{$value}'";
+            }else {
+                $query .= " {$key} = '{$value}' AND";
+            }
+        }
+        
+        $resultado = self::consultarSQL($query);
+        return $resultado;
     }
 
     /**
@@ -302,5 +321,3 @@ class ActiveRecord {
     }
 
 }
-
-?>

@@ -8,6 +8,8 @@ use Controllers\EventosController;
 use Controllers\RegalosController;
 use Controllers\PonentesController;
 use Controllers\DashboardController;
+use Controllers\APIEventosController;
+use Controllers\APIPonentesController;
 use Controllers\RegistradosController;
 
 $router = new Router();
@@ -48,6 +50,11 @@ $router->post('/admin/ponentes/editar', [PonentesController::class, 'editar']);
 $router->post('/admin/ponentes/eliminar', [PonentesController::class, 'eliminar']);
 
 $router->get('/admin/eventos', [EventosController::class, 'index']);
+$router->get('/admin/eventos/crear', [EventosController::class, 'crear']);
+$router->post('/admin/eventos/crear', [EventosController::class, 'crear']);
+
+$router->get('/api/eventos', [APIEventosController::class, 'index']);
+$router->get('/api/ponentes', [APIPonentesController::class, 'index']);
 
 $router->get('/admin/registrados', [RegistradosController::class, 'index']);
 

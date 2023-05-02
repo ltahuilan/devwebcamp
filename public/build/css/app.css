@@ -406,9 +406,18 @@ h3 {
   color: #FFFFFF;
   font-size: 2rem;
 }
-.formulario__label, .formulario__texto {
+.formulario__label, .formulario__texto, .formulario__select {
   color: #515442;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+.formulario__radio {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.formulario__radio > div {
+  display: flex;
+  gap: 0.7rem;
 }
 .formulario__input, .formulario__input--sociales {
   padding: 1rem;
@@ -494,6 +503,69 @@ h3 {
 }
 .acciones__enlace:hover {
   color: #003c75;
+}
+
+.horas {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(1, 1fr);
+}
+@media (min-width: 768px) {
+  .horas {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.horas__hora, .horas__hora--selec, .horas__hora--desactivada {
+  border: 1px solid #007df4;
+  border-radius: 0.7rem;
+  color: #007df4;
+  padding: 1rem;
+  text-align: center;
+}
+.horas__hora:hover, .horas__hora--selec:hover, .horas__hora--desactivada:hover {
+  cursor: pointer;
+}
+.horas__hora--desactivada {
+  border: 1px solid #64748B;
+  color: #64748B;
+  opacity: 0.6;
+}
+.horas__hora--desactivada:hover {
+  cursor: not-allowed;
+}
+.horas__hora--selec {
+  background-color: #007df4;
+  color: #FFFFFF;
+}
+
+.lista-ponentes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(1, 1fr);
+}
+.lista-ponentes__ponente, .lista-ponentes__ponente--seleccionado {
+  padding: 1rem;
+  border: 1px solid #007df4;
+  border-radius: 0.7rem;
+  text-align: center;
+  color: #007df4;
+  cursor: pointer;
+}
+.lista-ponentes__ponente--seleccionado {
+  background-color: #007df4;
+  color: #FFFFFF;
+}
+.lista-ponentes__no-ponentes {
+  text-align: center;
+  color: #ff5d5d;
 }
 
 .header {

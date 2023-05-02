@@ -12,6 +12,11 @@ class AuthController {
      * muestra la pagina de login
      */
     public static function login(Router $router) {
+        
+        if($_SERVER['REQUEST_URI'] === '/') {
+            header('Location: /login');
+        }
+
         $alertas = [];
         
         //validar formulario
