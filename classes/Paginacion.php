@@ -10,7 +10,7 @@ class Paginacion extends ActiveRecord {
     protected $registros_por_pagina;
     protected $total_registros;
 
-    public function __construct($pagina_actual = 1, $registros_por_pagina = 6, $total_registros) {
+    public function __construct($pagina_actual = 1, $registros_por_pagina = 6, $total_registros = 0) {
 
         $this->pagina_actual = (int) $pagina_actual;
         $this->registros_por_pagina = (int) $registros_por_pagina;
@@ -19,7 +19,9 @@ class Paginacion extends ActiveRecord {
 
     //calcular el offset
     public function offset() {
-        return $this->registros_por_pagina * ($this->pagina_actual - 1 );
+        $pagina_actual = $this->pagina_actual - 1;
+        // debuguear($pagina_actual);
+        return $this->registros_por_pagina * ($pagina_actual);
     }
 
     //calcular el total de paginas

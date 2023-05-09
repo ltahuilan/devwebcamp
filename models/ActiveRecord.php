@@ -4,8 +4,8 @@ namespace Model;
 
 class ActiveRecord {
 
-    protected $id;
-    protected $imagen;
+    // public $id;
+    // public $imagen;
 
     //atributos estaticos
     protected static $db;
@@ -180,6 +180,7 @@ class ActiveRecord {
      */
     public static function paginar($registros_por_pagina, $offset) {
         $query = "SELECT * FROM " . static::$tabla . " ORDER BY id ASC LIMIT {$registros_por_pagina} offset {$offset}";
+        // debuguear($query);
         return self::consultarSQL($query);
     }
 
@@ -236,7 +237,9 @@ class ActiveRecord {
     public static function total_registros() {
         $query = "SELECT COUNT(*) FROM " . static::$tabla;
         $resultado = self::$db->query($query);
-        $total = array_shift($resultado->fetch_array() );
+        $resultado_array = $resultado->fetch_array();
+        $total = $resultado_array ? array_shift($resultado_array) : '0';
+        // debuguear($total);
         return $total;
     }
 

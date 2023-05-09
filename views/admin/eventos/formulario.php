@@ -42,7 +42,7 @@
         <label for="dia" class="formulario__label">Selecciona el día</label>
 
         <div class="formulario__radio">
-            <?php forEach($dias as $dia) { ?>
+            <?php forEach($dias as $dia) {; ?>
                 <div>
                     <label for="<?php echo strtolower($dia->nombre)?>">
                         <?php echo $dia->nombre?>
@@ -52,11 +52,12 @@
                         name="dia"
                         id="<?php echo strtolower($dia->nombre)?>"
                         value="<?php echo $dia->id?>"
+                        <?php echo $evento->dia_id === $dia->id ? 'checked' : '';?>
                     >
                 </div>
-            <?php }?>
+            <?php }; ?>
         </div>
-        <input type="hidden" name="dia_id" value="">
+        <input type="hidden" name="dia_id" value="<?php echo $evento->dia_id?>">
     </div>
 
     <div class="formulario__bloque">
@@ -67,7 +68,7 @@
             <?php }?>
         </ul>
 
-        <input type="hidden" name="hora_id" value="">
+        <input type="hidden" name="hora_id" value="<?php echo $evento->hora_id;?>">
 
     </div>
 </fieldset>
@@ -87,7 +88,7 @@
             type="hidden"
             id="ponente_id"
             name="ponente_id"
-            value=""
+            value="<?php echo $evento->ponente_id;?>"
         >
     </div>
 

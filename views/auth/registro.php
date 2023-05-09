@@ -6,7 +6,7 @@
         include_once __DIR__ . '/../templates/alertas.php';
     ?>
 
-    <form method="POST" action="/registro" class="formulario">
+    <form id="registro" method="POST" action="/registro" class="formulario">
         <div class="formulario__bloque">
             <label for="nombre" class="formulario__label">Nombre:</label>
             <input
