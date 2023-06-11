@@ -1,0 +1,47 @@
+@use 'base/mixins' as mix;
+@use 'base/variables' as var;
+
+.paquetes {
+
+    &__grid {
+        @include mix.contenedor;
+        @include mix.grid(1, 3rem);
+        @include mix.tablet{
+            @include mix.grid(3, 5rem);
+        }
+    }
+}
+
+.paquete {
+    @include mix.card;
+    &:nth-child(2){
+        order: -1;
+        @include mix.tablet {
+            order: unset;
+        }
+    }
+    
+    &:nth-child(3){
+        order: -1;
+        @include mix.tablet {
+            order: unset;
+        }
+    }
+
+    @include mix.tablet {
+        order: unset;
+    }
+
+    &__lista {
+        @include mix.reset-lista;
+        line-height: 1.5;
+    }
+
+    &__precio {
+        font-weight: var.$bold;
+        font-size: 6rem;
+        color: var.$azul;
+        text-align: center;
+    }
+
+}

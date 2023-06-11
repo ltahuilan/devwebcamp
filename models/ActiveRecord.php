@@ -188,9 +188,15 @@ class ActiveRecord {
      * Método que que consulta un registro en una columna de la BD
      */
     public static function where($columna, $valor) {
-        $query = "SELECT *FROM " . static::$tabla . " WHERE $columna = '$valor'";
+        $query = "SELECT * FROM " . static::$tabla . " WHERE $columna = '$valor'";
         $resultado = self::consultarSQL($query);
         return array_shift($resultado);
+    }
+
+    public static function ordenar($columna, $orden) {
+        $query = "SELECT * FROM " .static::$tabla . " ORDER BY {$columna} {$orden}";
+        $resultado = self::consultarSQL($query);
+        return $resultado;
     }
 
     /**
@@ -234,12 +240,16 @@ class ActiveRecord {
     /**
      * Método para contar el total de registros de una tabla
      */
-    public static function total_registros() {
+    public static function total_registros($columna = '', $valor = '') {
         $query = "SELECT COUNT(*) FROM " . static::$tabla;
+
+        if($columna) {
+            $query .= " WHERE $columna = $valor";
+        }
+
         $resultado = self::$db->query($query);
         $resultado_array = $resultado->fetch_array();
         $total = $resultado_array ? array_shift($resultado_array) : '0';
-        // debuguear($total);
         return $total;
     }
 

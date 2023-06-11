@@ -1,8 +1,16 @@
 <header class="header">
     <div class="header__contenedor">
         <nav class="header__navegacion">
-            <a href="/registro#registro" class="header__enlace">Registro</a>
-            <a href="/login#login" class="header__enlace">Iniciar sesión</a>
+            <?php if (!is_auth()) { ?>
+                <a href="/registro#registro" class="header__enlace">Registro</a>
+                <a href="/login#login" class="header__enlace">Iniciar sesión</a>
+
+            <?php } else { ?>
+                <a href="<?php echo !is_admin() ? '/finalizar-registro' : '/admin/dashboard'?>" class="header__enlace">Administrar</a>
+                <form method="POST" action="/logout" class="dashboard__form">
+                    <input type="submit" value="Cerrar Sesión" class="dashboard__form--logout">
+                </form>
+            <?php } ?>
         </nav>
 
         <div class="header__contenido">
@@ -26,10 +34,18 @@
             </h2>
         </a>
         <nav class="navegacion">
-            <a href="/devwebcamp" class="navegacion__enlace">Evento</a>
-            <a href="/paquetes" class="navegacion__enlace">Paquetes</a>
-            <a href="/workshop-conferencias" class="navegacion__enlace">Workshop / Conferencias</a>
-            <a href="/registro" class="navegacion__enlace">Comprar pase</a>
+            <a href="/devwebcamp#devwebcamp" class="navegacion__enlace <?php echo enlace_actual('/devwebcamp') ? 'navegacion__enlace--actual' : '' ?>">
+                Evento
+            </a>
+            <a href="/paquetes#paquetes" class="navegacion__enlace <?php echo enlace_actual('/paquetes') ? 'navegacion__enlace--actual' : '' ?>">
+                Paquetes
+            </a>
+            <a href="/workshop-conferencias#eventos" class="navegacion__enlace <?php echo enlace_actual('/workshop-conferencias') ? 'navegacion__enlace--actual' : '' ?>">
+                Workshop / Conferencias
+            </a>
+            <a href="/registro#registro" class="navegacion__enlace <?php echo enlace_actual('/registro') ? 'navegacion__enlace--actual' : '' ?>">
+                Comprar pase
+            </a>
         </nav>
     </div>
 </div>

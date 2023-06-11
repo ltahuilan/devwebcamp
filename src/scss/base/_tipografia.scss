@@ -28,3 +28,7 @@ h3 {
 [class$="__heading"] {
     @include mix.nombre-pagina;
 }
+
+[class$="__descripcion"] {
+    @include mix.descripcion-pagina;
+}

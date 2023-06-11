@@ -58,7 +58,6 @@ class AuthController {
                         if($_SESSION['admin'] !== NULL) {
                             header('Location: /admin/dashboard');
                         }else {
-                            debuguear('NO eres admin...');
                             header('Location: /finalizar-registro');
                         }
                         

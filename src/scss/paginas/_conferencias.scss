@@ -1,0 +1,100 @@
+@use 'base/mixins' as mix;
+@use 'base/variables' as var;
+
+.agenda {
+    @include mix.contenedor;
+    padding: 5rem 0;
+}
+
+.eventos {
+    //variable para uso de interpolacion en SASS
+    $modificador: &;
+
+    &__heading {
+        color: var.$azul;
+        margin: 5rem 0;
+        font-weight: var.$bold;
+        font-size: clamp(2rem, 8vw, 6rem);
+        text-align: left;  
+    }
+
+    &__fecha {
+        color: var.$gris;
+    }
+
+    &--workshops {
+
+        #{$modificador}__heading {
+            color: var.$secundario;
+        }
+
+        .evento__informacion {
+            background-color: var.$secundario;
+            &:hover {
+                background-color: darken(var.$secundario, 10%);
+            }
+        }
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        color: rgba(var.$blanco, .7);
+
+        &:hover {
+            color: rgba(var.$blanco, 1);
+        }
+    }
+}
+
+.evento {
+
+    &__hora {
+        font-weight: var.$bold;
+    }
+
+    &__informacion {
+        background-color: var.$azul;
+        color: var.$blanco;
+        padding: 2rem;
+        border-radius: 1rem;
+        transition-property: background-color;
+        transition-duration: 150ms;
+        transition-timing-function: ease-in-out;
+        &:hover {
+            background-color: darken(var.$azul, 10%);
+        }
+    }
+    
+    &__nombre {
+        font-size: 2.4rem;
+        margin: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    &__introduccion {
+        font-size: 1.6rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        @include mix.tablet {
+            -webkit-line-clamp: 2;
+        }
+    }
+
+    &__autor-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__autor-imagen {
+        width: 7rem;
+        background-color: var.$blanco;
+        border-radius: 50%;
+    }
+}
+

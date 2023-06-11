@@ -56,9 +56,7 @@ function is_admin() : bool {
  * Verifica si la url contiene una cadena de texto
  * Se utilizará para agregar una clase al enlace seleccionado
  */
-function enlace_actual($str_href) {
-   
+function enlace_actual($str_href) {   
     $url_actual = $_SERVER["PATH_INFO"];
-
-    return str_contains($url_actual, $str_href) ? true : false;
+    return str_contains($url_actual, $str_href ?? '/') ? true : false;
 }

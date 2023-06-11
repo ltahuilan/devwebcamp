@@ -19,35 +19,54 @@ const terser = require('gulp-terser-js');
 const concat = require('gulp-concat');
 const rename = require('gulp-rename')
 
+//webpack
+const webpack = require('webpack-stream');
 
 const paths = {
     scss: 'src/scss/**/*.scss',
     js: 'src/js/**/*.js',
     imagenes: 'src/img/**/*'
 }
+
 function css() {
     return src(paths.scss)
-        .pipe( sourcemaps.init())
-        .pipe( sass({outputStyle: 'expanded'}))
-        .pipe( postcss([autoprefixer()]) )
-        // .pipe( postcss( [cssnano()]) )
-        .pipe( sourcemaps.write('.'))
-        .pipe(  dest('public/build/css') );
+        .pipe(sourcemaps.init())
+        .pipe(sass({outputStyle: 'expanded'}))
+        .pipe(postcss([autoprefixer()]))
+        .pipe(postcss( [cssnano()]) )
+        .pipe(sourcemaps.write('.'))
+        .pipe(dest('./public/build/css'));
 }
+
 function javascript() {
     return src(paths.js)
-      .pipe(sourcemaps.init())
-      .pipe(concat('bundle.js')) 
-    //   .pipe(terser())
-      .pipe(sourcemaps.write('.'))
-      .pipe(rename({ suffix: '.min' }))
-      .pipe(dest('./public/build/js'))
+        //webpack
+        .pipe(webpack({
+            module: {
+                //regla para cargar loaders de css
+                rules: [
+                    {
+                        test: /\.css$/i,
+                        use: ['style-loader', 'css-loader']
+                    }
+                ]
+            },
+            mode: 'production',
+            watch: true,
+            entry: './src/js/app.js'
+        }))
+        .pipe(sourcemaps.init())
+        // .pipe(concat('bundle.js'))
+        .pipe(terser())
+        .pipe(sourcemaps.write('.'))
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(dest('./public/build/js'))
 }
 
 function imagenes() {
     return src(paths.imagenes)
-        .pipe( cache(imagemin({ optimizationLevel: 3})))
-        .pipe( dest('public/build/img'))
+        .pipe(cache(imagemin({ optimizationLevel: 3})))
+        .pipe(dest('/.public/build/img'))
 }
 
 function versionWebp( done ) {
@@ -80,7 +99,7 @@ function dev(done) {
 }
 
 exports.css = css;
-exports.js = javascript;
+exports.javascript = javascript;
 exports.imagenes = imagenes;
 exports.versionWebp = versionWebp;
 exports.versionAvif = versionAvif;

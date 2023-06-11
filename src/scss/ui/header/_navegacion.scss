@@ -11,11 +11,13 @@
     &__enlace {
         color: var.$blanco;
         font-weight: bold;
-        font-size: 2rem;
+        font-size: 1.8rem;
         text-transform: uppercase;
-        padding: 2rem;
+        padding: 1rem 1.5rem;
         display: block;
         text-align: center;
+
+        &--actual,
         &:hover {
             background-color: var.$blanco;
             color: var.$azul;
