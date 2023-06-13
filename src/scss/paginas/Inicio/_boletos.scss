@@ -1,0 +1,89 @@
+@use 'base/mixins' as mix;
+@use 'base/variables' as var;
+
+.boletos {
+
+    &__grid {
+        @include mix.contenedor-md;
+        @include mix.grid(1, 5rem);
+    }
+
+    &__enlace-contenedor {
+        margin-top: 5rem;
+        display: flex;
+        justify-content: center;
+    }
+    
+    &__enlace {
+        @include mix.boton(var.$azul, var.$blanco);
+        width: auto;
+    }
+}
+
+
+.boleto {
+    width: min(100% - 5rem, 65rem);
+    margin: 0 auto;
+    padding: 6rem;
+    border-radius: 2rem;
+    color: var.$blanco;
+    position: relative;
+
+    &::before,
+    &::after {
+        position: absolute;
+        content: '';
+        width: 5rem;
+        height: 5rem;
+        background-color: var.$blanco;
+        top: calc(50% - 2.5rem);
+    }
+
+    &::before {
+        clip-path: circle(50% at 15% 50%);
+        left: 0%;
+
+    }
+    &::after {
+        clip-path: circle(50% at 85% 50%);
+        right: 0%;
+    }
+
+
+    &--presencial {
+        background-color: hsla(178, 100%, 39%, 1);
+            background-image:
+                radial-gradient(at 50% 20%, hsla(209, 100%, 47%, 1) 0px, transparent 50%),
+                radial-gradient(at 80% 13%, hsla(178, 100%, 39%, 1) 0px, transparent 50%),
+                radial-gradient(at 87% 65%, hsla(209, 100%, 47%, 1) 0px, transparent 50%),
+                radial-gradient(at 14% 12%, hsla(178, 100%, 39%, 1) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(209, 100%, 47%, 1) 0px, transparent 50%),
+                radial-gradient(at 48% 57%, hsla(178, 100%, 39%, 1) 0px, transparent 50%),
+                radial-gradient(at 0% 0%, hsla(209, 100%, 47%, 1) 0px, transparent 50%);
+    }
+
+    &--virtual {
+        background-color: var.$secundario;
+    }
+
+    &--gratis {
+        background-color: var.$azul;
+    }
+
+    &__logo {
+        @include mix.texto-fluido(2rem, 4rem);
+        @include mix.logo;
+    }
+
+    &__plan {
+        font-size: 2rem;
+        text-transform: uppercase;
+        margin: 3rem 0 0 0;
+    }
+
+    &__precio {
+        font-size: 4rem;
+        font-weight: var.$bold;
+        margin: 3rem 0 0 0;
+    }
+}
