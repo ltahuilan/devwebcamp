@@ -63,11 +63,12 @@ $router->get('/admin/registrados', [RegistradosController::class, 'index']);
 
 $router->get('/admin/regalos', [RegalosController::class, 'index']);
 
-//rutas pulicas
+//rutas publicas
 $router->get('/', [PaginasController::class, 'index']);
 $router->get('/devwebcamp', [PaginasController::class, 'evento']);
 $router->get('/paquetes', [PaginasController::class, 'paquetes']);
 $router->get('/workshop-conferencias', [PaginasController::class, 'conferencias']);
+$router->get('/pagina_404', [PaginasController::class, 'error']);
 
 
 $router->comprobarRutas();

@@ -56,7 +56,8 @@ class Router {
             //requiere la funcion y el (los) arreglo de rutas
             call_user_func($fn, $this);
         }else {
-            echo 'ERROR 404: Página No Encontrada o Ruta no válida...';
+            // echo 'ERROR 404: Página No Encontrada o Ruta no válida...';
+            header('Location: /pagina_404');
         }
     }
 
@@ -91,6 +92,5 @@ class Router {
          */
     }
 }
-
 
 ?>
